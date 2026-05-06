@@ -157,7 +157,7 @@ flattened_medical_activity_history = [
     {
         "claim_id": claim["claim_id"],
         "medical_event_type": event["type"],
-        "medical_event_date": event["date"],
+        "medical_event_date": datetime.strptime(event["date"], "%Y-%m-%d").date(),
     }
     for claim in medical_activity_history
     for event in claim["medical_events"]
