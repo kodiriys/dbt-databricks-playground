@@ -209,7 +209,7 @@ table_name = "medical_activity"
 # Write the DataFrame to a Delta table
 # .option("mergeSchema", "true") .option("overwriteSchema", "true")
 df.write.format("delta").option("overwriteSchema", "true").mode("overwrite").save(
-    f"raw/{table_name}"
+    f"bronze/{table_name}"
 )
 
 

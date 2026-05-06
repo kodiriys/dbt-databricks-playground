@@ -20,7 +20,7 @@
 
 Created schemas in workspace:
 
-- raw
+- bronze
 - silver
 - gold
   For medallion architecture
