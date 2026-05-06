@@ -201,3 +201,19 @@ df = spark.createDataFrame((Row(**x) for x in data), schema=schema)
 print("SELECT TOP 3")
 
 df.limit(3).show()
+
+
+# Save data into Delta Table
+table_name = "medical_activity"
+
+# Write the DataFrame to a Delta table
+# .option("mergeSchema", "true") .option("overwriteSchema", "true")
+df.write.format("delta").option("overwriteSchema", "true").mode("overwrite").save(
+    f"raw/{table_name}"
+)
+
+
+# Test new delta table
+
+table = spark.sql(f"SELECT * FROM {table_name} LIMIT 2")
+display(table)
