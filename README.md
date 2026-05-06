@@ -15,3 +15,12 @@
         ]
     }
     ```
+
+# Databricks
+
+Created schemas in workspace:
+
+- raw
+- silver
+- gold
+  For medallion architecture
