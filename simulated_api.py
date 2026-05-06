@@ -102,3 +102,9 @@ class SimulatedMedicalActivityAPI:
         medical_events.sort(key=lambda x: x["date"])
 
         return {"claim_id": claim_id, "medical_events": medical_events}
+
+
+if __name__ == "__main__":
+    api = SimulatedMedicalActivityAPI()
+    result = api.request()
+    print(result)
