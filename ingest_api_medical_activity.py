@@ -163,7 +163,7 @@ flattened_medical_activity_history = [
     for event in claim["medical_events"]
 ]
 
-print(json.dumps(flattened_medical_activity_history[:3], indent=4))
+print(json.dumps(flattened_medical_activity_history[:3], indent=4, default=str))
 
 
 ### Convert to Spark dataframe
