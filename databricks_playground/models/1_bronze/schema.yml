@@ -17,3 +17,14 @@ models:
         description: "Is litigated"
       - name: number_of_priors
         description: "Number of priors"
+  - name: medical_activity
+    description: "Claim medical activity"
+    columns:
+      - name: claim_id
+        description: "The primary key for this table"
+        data_tests:
+          - not_null
+      - name: medical_event_type
+        description: "Medical event type"
+      - name: medical_event_date
+        description: "Date of medical event"
