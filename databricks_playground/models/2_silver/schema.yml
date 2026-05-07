@@ -1,0 +1,157 @@
+version: 2
+
+models:
+  - name: dim_claims
+    description: "Dimension table for claims with cleaned and standardized attributes"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for the claim"
+        data_tests:
+          - unique
+          - not_null
+      - name: date_of_loss
+        description: "Date when the loss occurred"
+        data_tests:
+          - not_null
+      - name: body_part
+        description: "Body part affected by the claim"
+      - name: is_litigated
+        description: "Whether the claim is involved in litigation"
+        data_tests:
+          - not_null
+      - name: number_of_priors
+        description: "Number of prior claims for this claimant"
+        data_tests:
+          - not_null
+      - name: processed_at
+        description: "Timestamp when this record was processed"
+
+  - name: dim_medical_event_type
+    description: "Dimension table containing distinct medical event types with surrogate keys"
+    columns:
+      - name: medical_event_type_key
+        description: "Surrogate key for medical event type"
+        data_tests:
+          - unique
+          - not_null
+      - name: medical_event_type
+        description: "Original medical event type value"
+        data_tests:
+          - unique
+          - not_null
+      - name: medical_event_type_normalized
+        description: "Normalized uppercase version of medical event type"
+        data_tests:
+          - unique
+          - not_null
+      - name: processed_at
+        description: "Timestamp when this record was processed"
+
+  - name: dim_date
+    description: "Date dimension table containing comprehensive calendar attributes for all dates in medical events"
+    columns:
+      - name: date_key
+        description: "Primary key - date value"
+        data_tests:
+          - unique
+          - not_null
+      - name: year
+        description: "Year component of the date"
+        data_tests:
+          - not_null
+      - name: month
+        description: "Month component (1-12)"
+        data_tests:
+          - not_null
+      - name: day
+        description: "Day component (1-31)"
+        data_tests:
+          - not_null
+      - name: quarter
+        description: "Quarter of the year (1-4)"
+        data_tests:
+          - not_null
+      - name: week_of_year
+        description: "ISO week number of the year"
+        data_tests:
+          - not_null
+      - name: day_of_week
+        description: "Day of week (1-7, where 1 is Sunday)"
+        data_tests:
+          - not_null
+      - name: day_of_year
+        description: "Day of the year (1-366)"
+        data_tests:
+          - not_null
+      - name: day_name
+        description: "Full name of the day (Monday, Tuesday, etc.)"
+        data_tests:
+          - not_null
+      - name: month_name
+        description: "Full name of the month (January, February, etc.)"
+        data_tests:
+          - not_null
+      - name: date_id
+        description: "String date identifier in yyyy-MM-dd format"
+        data_tests:
+          - unique
+          - not_null
+      - name: year_month
+        description: "Year-month combination in yyyy-MM format"
+        data_tests:
+          - not_null
+      - name: year_quarter
+        description: "Year-quarter combination in yyyy-Q format"
+        data_tests:
+          - not_null
+      - name: is_weekend
+        description: "Indicates if the date falls on a weekend"
+        data_tests:
+          - not_null
+      - name: is_weekday
+        description: "Indicates if the date falls on a weekday"
+        data_tests:
+          - not_null
+      - name: month_end_date
+        description: "Last day of the month for this date"
+        data_tests:
+          - not_null
+      - name: next_month_start_date
+        description: "First day of the following month"
+        data_tests:
+          - not_null
+
+  - name: fact_medical_activity
+    description: "Fact table containing medical events associated with claims"
+    columns:
+      - name: claim_id
+        description: "Foreign key reference to claims dimension"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_claims')
+              field: claim_id
+      - name: medical_event_type_key
+        description: "Foreign key reference to medical event type dimension"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_medical_event_type')
+              field: medical_event_type_key
+      - name: medical_event_type
+        description: "Medical event type value (denormalized for convenience)"
+        data_tests:
+          - not_null
+      - name: medical_event_date
+        description: "Original date when the medical event occurred"
+        data_tests:
+          - not_null
+      - name: medical_event_date_key
+        description: "Foreign key reference to date dimension"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: processed_at
+        description: "Timestamp when this record was processed"
