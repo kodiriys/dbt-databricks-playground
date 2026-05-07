@@ -147,5 +147,7 @@ models:
         description: "Categorized complexity level (High: >=50, Medium: >=25, Low: <25)"
         data_tests:
           - not_null
+          - accepted_values:
+              values: ["High", "Medium", "Low"]
       - name: processed_at
         description: "Timestamp when this record was processed"
