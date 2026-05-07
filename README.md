@@ -32,3 +32,10 @@ Created schemas in catalog `medallion`:
 - `3_gold`
 
 For medallion architecture.
+
+## DBT
+
+Installed and initialized DBT using `dbt-core` and `dbt-databricks` packages.
+
+`dbt init`
+`dbt debug`
