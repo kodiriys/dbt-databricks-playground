@@ -35,7 +35,13 @@ For medallion architecture.
 
 ## DBT
 
-Installed and initialized DBT using `dbt-core` and `dbt-databricks` packages.
-
-`dbt init`
-`dbt debug`
+```sh
+uv init
+uv add dbt-core dbt-databricks
+uv sync
+source .venv/bin/activate
+dbt init
+cd databricks_playground
+dbt debug
+# 02:09:31  All checks passed!
+```
