@@ -16,6 +16,11 @@
     }
     ```
 
+## Data ingestion into Databricks
+
+See notebooks in `Notebooks` folder.
+I have set up jobs in Databricks that run these notebooks on a schedule.
+
 # Databricks
 
 Created catalog called `medallion`.
@@ -26,4 +31,4 @@ Created schemas in catalog `medallion`:
 - `2_silver`
 - `3_gold`
 
-For medallion architecture
+For medallion architecture.
