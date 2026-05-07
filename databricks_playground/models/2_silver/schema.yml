@@ -1,8 +1,10 @@
 version: 2
 
 models:
-  - name: dim_claims
+  - name: stg_dim_claims
     description: "Dimension table for claims with cleaned and standardized attributes"
+    config:
+      alias: dim_claims
     columns:
       - name: claim_id
         description: "Unique identifier for the claim"
@@ -26,8 +28,10 @@ models:
       - name: processed_at
         description: "Timestamp when this record was processed"
 
-  - name: dim_medical_event_type
+  - name: stg_dim_medical_event_type
     description: "Dimension table containing distinct medical event types with surrogate keys"
+    config:
+      alias: dim_medical_event_type
     columns:
       - name: medical_event_type_key
         description: "Surrogate key for medical event type"
@@ -47,8 +51,10 @@ models:
       - name: processed_at
         description: "Timestamp when this record was processed"
 
-  - name: dim_date
+  - name: stg_dim_date
     description: "Date dimension table containing comprehensive calendar attributes for all dates in medical events"
+    config:
+      alias: dim_date
     columns:
       - name: date_key
         description: "Primary key - date value"
@@ -121,8 +127,10 @@ models:
         data_tests:
           - not_null
 
-  - name: fact_medical_activity
+  - name: stg_fact_medical_activity
     description: "Fact table containing medical events associated with claims"
+    config:
+      alias: fact_medical_activity
     columns:
       - name: claim_id
         description: "Foreign key reference to claims dimension"

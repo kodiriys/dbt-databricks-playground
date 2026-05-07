@@ -1,13 +1,13 @@
 WITH claims AS (
-    SELECT * FROM {{ ref('dim_claims') }}
+    SELECT * FROM {{ ref('stg_dim_claims') }}
 ),
 
 medical_activity AS (
-    SELECT * FROM {{ ref('fact_medical_activity') }}
+    SELECT * FROM {{ ref('stg_fact_medical_activity') }}
 ),
 
 medical_event_types AS (
-    SELECT * FROM {{ ref('dim_medical_event_type') }}
+    SELECT * FROM {{ ref('stg_dim_medical_event_type') }}
 ),
 
 -- Get medical activity details with event type names
