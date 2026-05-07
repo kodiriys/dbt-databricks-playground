@@ -33,7 +33,7 @@ models:
 
     # Bronze layer configuration
     1_bronze:
-      +schema: 0_bronze
+      +schema: 1_bronze
       +materialized: view
 
     # Silver layer configuration
