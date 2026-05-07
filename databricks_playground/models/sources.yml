@@ -1,0 +1,7 @@
+sources:
+  - name: landing
+    database: medallion
+    schema: 0_landing
+    tables:
+      - name: claims
+      - name: medical_activity
