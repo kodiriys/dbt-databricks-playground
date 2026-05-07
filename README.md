@@ -44,4 +44,8 @@ dbt init
 cd databricks_playground
 dbt debug
 # 02:09:31  All checks passed!
+
+dbt run -s "1_bronze"
+dbt run -s "2_silver"
+dbt run -s "3_gold"
 ```
