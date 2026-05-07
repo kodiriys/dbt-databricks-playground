@@ -52,4 +52,7 @@ dbt run -s "3_gold"
 
 # Or run all models
 dbt run
+
+# Then perform data quality checks
+dbt test
 ```
