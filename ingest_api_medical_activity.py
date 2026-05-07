@@ -208,12 +208,12 @@ table_name = "medical_activity"
 
 # Write the DataFrame to a Delta table
 # .option("mergeSchema", "true") .option("overwriteSchema", "true")
-df.write.format("delta").option("overwriteSchema", "true").mode("overwrite").save(
-    f"bronze/{table_name}"
-)
+df.write.format("delta").option("overwriteSchema", "true").mode(
+    "overwrite"
+).saveAsTable(f"medallion.`0_landing`.`{table_name}`")
 
 
 # Test new delta table
 
-table = spark.sql(f"SELECT * FROM {table_name} LIMIT 2")
+table = spark.sql(f"SELECT * FROM medallion.0_landing.{table_name} LIMIT 3")
 display(table)

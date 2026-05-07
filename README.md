@@ -18,9 +18,12 @@
 
 # Databricks
 
-Created schemas in workspace:
+Created catalog called `medallion`.
+Created schemas in catalog `medallion`:
 
-- bronze
-- silver
-- gold
-  For medallion architecture
+- `0_landing`
+- `1_bronze`
+- `2_silver`
+- `3_gold`
+
+For medallion architecture
