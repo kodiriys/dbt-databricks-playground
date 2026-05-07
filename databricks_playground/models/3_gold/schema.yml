@@ -1,0 +1,151 @@
+version: 2
+
+models:
+  - name: dim_claims
+    description: "Gold layer claims dimension - final curated claims data"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for the claim"
+        data_tests:
+          - unique
+          - not_null
+      - name: date_of_loss
+        description: "Date when the loss occurred"
+      - name: body_part
+        description: "Body part affected by the claim"
+      - name: is_litigated
+        description: "Whether the claim is involved in litigation"
+      - name: number_of_priors
+        description: "Number of prior claims for this claimant"
+      - name: processed_at
+        description: "Timestamp when this record was processed"
+
+  - name: dim_date
+    description: "Gold layer date dimension - final curated calendar data"
+    columns:
+      - name: date_key
+        description: "Primary key - date value"
+        data_tests:
+          - unique
+          - not_null
+      - name: year
+        description: "Year component of the date"
+      - name: month
+        description: "Month component (1-12)"
+      - name: day
+        description: "Day component (1-31)"
+      - name: quarter
+        description: "Quarter of the year (1-4)"
+      - name: week_of_year
+        description: "ISO week number of the year"
+      - name: day_of_week
+        description: "Day of week (1-7, where 1 is Sunday)"
+      - name: day_of_year
+        description: "Day of the year (1-366)"
+      - name: day_name
+        description: "Full name of the day"
+      - name: month_name
+        description: "Full name of the month"
+      - name: date_id
+        description: "String date identifier in yyyy-MM-dd format"
+      - name: year_month
+        description: "Year-month combination in yyyy-MM format"
+      - name: year_quarter
+        description: "Year-quarter combination in yyyy-Q format"
+      - name: is_weekend
+        description: "Indicates if the date falls on a weekend"
+      - name: is_weekday
+        description: "Indicates if the date falls on a weekday"
+      - name: month_end_date
+        description: "Last day of the month for this date"
+      - name: next_month_start_date
+        description: "First day of the following month"
+
+  - name: dim_medical_event_type
+    description: "Gold layer medical event type dimension - final curated medical event types"
+    columns:
+      - name: medical_event_type_key
+        description: "Surrogate key for medical event type"
+        data_tests:
+          - unique
+          - not_null
+      - name: medical_event_type
+        description: "Original medical event type value"
+        data_tests:
+          - unique
+          - not_null
+      - name: medical_event_type_normalized
+        description: "Normalized uppercase version of medical event type"
+        data_tests:
+          - unique
+          - not_null
+      - name: processed_at
+        description: "Timestamp when this record was processed"
+
+  - name: fact_medical_activity
+    description: "Gold layer medical activity fact - final curated medical events data"
+    columns:
+      - name: claim_id
+        description: "Foreign key reference to claims dimension"
+        data_tests:
+          - not_null
+      - name: medical_event_type_key
+        description: "Foreign key reference to medical event type dimension"
+        data_tests:
+          - not_null
+      - name: medical_event_type
+        description: "Medical event type value"
+        data_tests:
+          - not_null
+      - name: medical_event_date
+        description: "Original date when the medical event occurred"
+        data_tests:
+          - not_null
+      - name: medical_event_date_key
+        description: "Foreign key reference to date dimension"
+        data_tests:
+          - not_null
+      - name: processed_at
+        description: "Timestamp when this record was processed"
+
+  - name: fact_claim_complexity
+    description: "Fact table containing claim complexity scores based on multiple risk factors"
+    columns:
+      - name: claim_id
+        description: "Unique identifier for the claim"
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('dim_claims')
+              field: claim_id
+      - name: body_part_score
+        description: "Complexity points from body part (15 for spine/head/back, 0 otherwise)"
+        data_tests:
+          - not_null
+      - name: litigation_score
+        description: "Complexity points from litigation status (20 if litigated, 0 otherwise)"
+        data_tests:
+          - not_null
+      - name: prior_claims_score
+        description: "Complexity points from prior claims history (10 if >2 priors, 0 otherwise)"
+        data_tests:
+          - not_null
+      - name: surgery_score
+        description: "Complexity points from surgical procedures (25 if surgery present, 0 otherwise)"
+        data_tests:
+          - not_null
+      - name: opioid_score
+        description: "Complexity points from opioid prescriptions (15 if opioid present, 0 otherwise)"
+        data_tests:
+          - not_null
+      - name: total_complexity_score
+        description: "Total complexity score (sum of all individual scores)"
+        data_tests:
+          - not_null
+      - name: complexity_level
+        description: "Categorized complexity level (High: >=50, Medium: >=25, Low: <25)"
+        data_tests:
+          - not_null
+      - name: processed_at
+        description: "Timestamp when this record was processed"
