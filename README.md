@@ -26,6 +26,8 @@ Transform data from `0_landing` into a medallion architecture using DBT. (See DB
 
 Data is transformed into `1_bronze`, `2_silver`, and `3_gold` schemas using DBT models.
 
+DBT contains tests to ensure data quality and integrity.
+
 Tools used:
 
 - `DBT` (Data Build Tool) - for transforming data into the medallion architecture
