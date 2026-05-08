@@ -1,0 +1,21 @@
+databricks_playground:
+  target: stage
+  outputs:
+    stage:
+      type: databricks
+      database: medallion_stage
+      schema: default
+      host: redacted.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/redacted
+      token: REDACTED
+      auth_type: token
+      threads: 1
+    prod:
+      type: databricks
+      database: medallion_prod
+      schema: default
+      host: redacted.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/redacted
+      token: REDACTED
+      auth_type: token
+      threads: 1

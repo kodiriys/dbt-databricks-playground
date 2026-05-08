@@ -56,3 +56,14 @@ dbt run
 # Then perform data quality checks
 dbt test
 ```
+
+Building for stage vs production, if you check `profiles.example.yml` you can see the differences between the two targets.
+
+```sh
+dbt run --target stage
+dbt run --target prod
+dbt test --target stage
+dbt test --target prod
+dbt build --target stage
+dbt build --target prod
+```

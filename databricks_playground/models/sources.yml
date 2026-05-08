@@ -1,6 +1,6 @@
 sources:
   - name: landing
-    database: medallion
+    database: '{{ target.catalog }}'
     schema: 0_landing
     tables:
       - name: claims
