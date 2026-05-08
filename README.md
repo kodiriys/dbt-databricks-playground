@@ -22,7 +22,9 @@ Pipeline:
     - `Python Notebook` scheduled to run once an hour reaches out to simulated API to fetch medical activity data
     - Saves data into `medallion_{stage|prod}.0_landing.medical_activity`
 
-Transform data from `0_landing` into a medallion architecture using DBT. (See DBT lineage graph using the DBT extension.)
+Transform data from `0_landing` into a medallion architecture using DBT. DBT project files are located in `/databricks_playground` folder.
+
+(See DBT lineage graph using the DBT extension.)
 
 Data is transformed into `1_bronze`, `2_silver`, and `3_gold` schemas using DBT models.
 
