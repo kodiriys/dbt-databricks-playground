@@ -3,7 +3,7 @@ WITH medical_activity AS (
 ),
 
 medical_event_types AS (
-    SELECT * FROM {{ ref('dim_medical_event_type') }}
+    SELECT * FROM {{ ref('stg_dim_medical_event_type') }}
 ),
 
 enriched_medical_activity AS (
