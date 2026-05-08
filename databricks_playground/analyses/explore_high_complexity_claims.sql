@@ -8,7 +8,7 @@ FROM
 WHERE
     upper(complexity_level) = upper('High')
     AND
-    processed_at >= getdate() - 7
+    processed_at >= getdate() - INTERVAL 7 DAYS
 ORDER BY
     total_complexity_score DESC,
     processed_at DESC
