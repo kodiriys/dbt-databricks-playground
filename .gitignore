@@ -1,2 +1,4 @@
 .DS_Store
 databricks_playground/profiles.yml
+logs/query_log.sql
+logs/dbt.log

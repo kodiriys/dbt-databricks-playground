@@ -45,3 +45,6 @@ models:
     3_gold:
       +schema: 3_gold
       +materialized: table
+
+flags:
+  use_materialization_v2: true

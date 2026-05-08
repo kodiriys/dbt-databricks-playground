@@ -117,8 +117,9 @@ models:
           - unique
           - not_null
           - relationships:
-              to: ref('dim_claims')
-              field: claim_id
+              arguments:
+                to: ref('dim_claims')
+                field: claim_id
       - name: body_part_score
         description: "Complexity points from body part (15 for spine/head/back, 0 otherwise)"
         data_tests:

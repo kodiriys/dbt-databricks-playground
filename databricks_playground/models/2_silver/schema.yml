@@ -137,15 +137,17 @@ models:
         data_tests:
           - not_null
           - relationships:
-              to: ref('stg_dim_claims')
-              field: claim_id
+              arguments:
+                to: ref('stg_dim_claims')
+                field: claim_id
       - name: medical_event_type_key
         description: "Foreign key reference to medical event type dimension"
         data_tests:
           - not_null
           - relationships:
-              to: ref('stg_dim_medical_event_type')
-              field: medical_event_type_key
+              arguments:
+                to: ref('stg_dim_medical_event_type')
+                field: medical_event_type_key
       - name: medical_event_type
         description: "Medical event type value (denormalized for convenience)"
         data_tests:
@@ -159,7 +161,8 @@ models:
         data_tests:
           - not_null
           - relationships:
-              to: ref('stg_dim_date')
-              field: date_key
+              arguments:
+                to: ref('stg_dim_date')
+                field: date_key
       - name: processed_at
         description: "Timestamp when this record was processed"
