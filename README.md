@@ -26,7 +26,7 @@ Transform data from `0_landing` into a medallion architecture using DBT. DBT pro
 
 See DBT lineage graph using the DBT extension:
 
-![DBT Lineage Graph](DBT_Lineage_Graph.png)
+![DBT Lineage Graph](DBT_Lineage_DAG.png)
 
 Data is transformed into `1_bronze`, `2_silver`, and `3_gold` schemas using DBT models.
 
