@@ -35,6 +35,7 @@ Tools used:
 - `SQL` - for querying data in Databricks and modelling data using DBT
 - `PySpark` - for processing data in Databricks Notebooks
 - `Git` - for version control
+- `UV` - for Python dependency management
 - `Airflow` - This was not used in this simple project but for a production environment I would set it up to orchestrate DBT jobs and schedule them using the Kubernetes orchestrator
 
 # Input sample data
